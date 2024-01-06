@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Virtual Try-All with image conditioned diffusion">
+  <meta name="keywords" content="Diffuse to Choose, virtual try-all, virtual try-on, diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <title>Diffuse to Choose: Enriching Image Conditioned Inpainting in Latent Diffusion Models for Virtual Try-All</title> -->
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XRP6P04VQM"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XRP6P04VQM');
+</script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Diffuse to Choose: Enriching Image Conditioned Inpainting in Latent Diffusion Models for Virtual Try-All</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://mehmetsayginseyfioglu.github.io/">Mehmet Saygin Seyfioglu</a><sup><span>&#9824;</span></sup>,</span>
+            <span class="author-block">
+              <a href="https://www.amazon.science/author/karim-bouyarmane">Karim Bouyarmane</a><sup><span>&#9827;</span></sup>,</span>
+            <span class="author-block">
+              <a href="https://www.amazon.science/author/suren-kumar">Suren Kumar</a><sup><span>&#9827;</span></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.amazon.science/author/amir-tavanaei">Amir Tavanaei</a><sup><span>&#9827;</span></sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://www.amazon.science/author/ismail-tutar">Ismail B. Tutar</a><sup><span>&#9827;</span></sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block new-line"><sup><span>&#9824;</span></sup>University of Washington</span>
+            <span class="author-block new-line"><sup><span>&#9827;</span></sup>Amazon</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2312.04746"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2312.04746"
+                   class="external-link button is-normal is-rounded is-dark" disabled>
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  
+                  <span>Code-Coming Soon!</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/"
+                   class="external-link button is-normal is-rounded is-dark" disabled>
+                  <span class="icon">
+                      <i class="fas fa-play-circle"></i>
+                  </span>
+                  <span>Demo-Coming Soon!</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/editing/dct_samples.jpg"
+                   alt="Teaser."/>
+      <h2 class="subtitle has-text-centered">
+        Diffuse to Choose (DTC) allows users to virtually place any e-commerce item in any setting, ensuring detailed, semantically coherent blending with realistic lighting and shadows.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%" controls>
+        <source src="./static/videos/diffuse2choose.mp4" type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        Demo video of Diffuse2Choose. Please note that for the sake of brevity, the video has been edited for speed. In reality, the inpainting process for a single image typically takes around 6 seconds.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <h2 class="subtitle has-text-centered">More Examples!</h2>
+      <div id="results-carousel-face" class="carousel results-carousel">
+        <div class="item item-clothing">
+          <div class="carousel-content">
+            <img src="static/images/editing/tshirt.png"
+                   alt="shirt."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+        <div class="item item-couch">
+          <div class="carousel-content">
+            <img src="static/images/editing/couch.png"
+                   alt="couches."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+                <div class="item item-shirt">
+          <div class="carousel-content">
+            <img src="static/images/editing/shirt.png"
+                   alt="shirts."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+
+                <div class="item item-pants">
+          <div class="carousel-content">
+            <img src="static/images/editing/pants.png"
+                   alt="pants."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+
+          <div class="item item-chair">
+          <div class="carousel-content">
+            <img src="static/images/editing/chair.png"
+                   alt="chair."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+
+
+               <div class="item item-shirt2">
+          <div class="carousel-content">
+            <img src="static/images/editing/shirt_2.png"
+                   alt="shirt2."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+
+           <div class="item item-dress">
+          <div class="carousel-content">
+            <img src="static/images/editing/dress.png"
+                   alt="dress."
+                   style="width: auto; height: 500px;">
+          </div>
+        </div>
+
+                
+       
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            As online shopping is growing, the ability for buyers to virtually visualize products in their settings—a phenomenon we define as "Virtual Try-All"—has become crucial. Recent diffusion models inherently contain a world model, rendering them suitable for this task within an inpainting context. However, traditional image-conditioned diffusion models often fail to capture the fine-grained details of products. In contrast, personalization-driven models such as <a href="https://arxiv.org/abs/2305.01257" target="_blank">DreamPaint</a> are good at preserving the item's details but they are not optimized for real-time applications. 
+          </p>
+          <p>
+            We present <strong>Diffuse to Choose</strong>, a novel diffusion-based image-conditioned inpainting model that efficiently balances fast inference with the retention of high-fidelity details in a given reference item while ensuring accurate semantic manipulations in the given scene content. Our approach is based on incorporating fine-grained features from the reference image directly into the latent feature maps of the main diffusion model, alongside with a perceptual loss to further preserve the reference item's details. We conducted extensive testing on both in-house and publicly available datasets, and showed that Diffuse to Choose is superior to existing zero-shot diffusion inpainting methods as well as few-shot diffusion personalization algorithms like <a href="https://arxiv.org/abs/2305.01257" target="_blank">DreamPaint</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+        <!--/ Architecture. -->
+        <div class="section-title">
+          <h2 class="title is-3 is-centered">Model Architecture</h2>
+        </div>
+        <div class="columns is-centered has-text-centered">
+          <div class="column">
+            <div class="publication-img">
+              <img id="architecture" src="static/images/training/pipeline_final.png"/>
+            </div>
+          </div>
+        </div>
+        <p>
+          We utilize a secondary U-Net Encoder to inject fine-grained details into the diffusion process. This begins with masking the source image and then inserting the reference image within the masked area. The resulting pixel-level 'hint' is subsequently adapted by a shallow CNN, aligning it with the VAE output dimensions of the source image, before element-wise added to it. Following this, a U-Net Encoder processes the adapted hint, where at each scale of the U-Net, a FILM module affinely aligns the skip-connected features from the main U-Net Encoder with the pixel-level features from the hint U-Net Encoder. Finally, these aligned feature maps, combined with the main image conditioning, facilitate the inpainting of the masked region.
+        </p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+      <div class="section-title">
+        <h2 class="title is-3">Masking Strategy</h2>
+      </div>
+
+    <div class="columns is-centered">
+
+      <!-- Cross domain. -->
+      <div class="column">
+        <div class="content">
+
+          <p>
+            To handle arbitrary mask shapes and in-the-wild examples during inference, we implement a technique for mask augmentation. With this approach, we have an equal probability of using either a bounding box mask (derived from the fine-grained mask) or a fine-grained mask itself during training. When a fine-grained mask is selected, we integrate reference image within the largest rectangular area of the mask.
+
+            <br>
+          </p>
+            <div class="publication-img">
+              <img id="style_transfer" src="static/images/training/mask_strategy.png"/>
+            </div>
+        </div>
+      </div>
+      <!--/ Cross domain. -->
+
+      <!-- New domain editing. -->
+    </div>
+    <!--/ New domain editing. -->
+  </div>
+</section>
+
+
+<section class="hero is-light is-small">
+  <div class="container is-max-desktop">
+
+      <div class="section-title">
+        <br>
+        <h2 class="title is-3">Qualitative Results</h2>
+      </div>
+
+    <div class="columns is-centered">
+
+      <!-- Cross domain. -->
+      <div class="column">
+        <div class="content">
+
+          <p>
+            Diffuse to Choose can work with both in the wild reference images and source images, with arbitrary or rigid mask shapes.  <br>
+          </p>
+            <div class="publication-img">
+              <img id="examples" src="static/images/examples/dct_samples_large.png"/>
+              <br><br>
+            </div>
+        </div>
+      </div>
+      <!--/ Cross domain. -->
+
+      <!-- New domain editing. -->
+    </div>
+    <!--/ New domain editing. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+      <div class="section-title">
+        <h2 class="title is-3">Some Fun Applications</h2>
+      </div>
+
+    <div class="columns is-centered">
+
+      <!-- Cross domain. -->
+      <div class="column">
+        <div class="content">
+
+          <p>
+            You can iteratively decorate your room using Diffuse to Choose. <br>
+          </p>
+            <div class="publication-img">
+              <img id="examples" src="static/images/examples/decorate_room.png"/>
+            </div>
+
+             <p>
+            Or try on different combination of clothes without any constraints.  <br>
+          </p>
+
+             <div class="publication-img">
+              <img id="examples" src="static/images/examples/iterative_clothing.png"/>
+            </div>
+
+               <p>
+            Adjusting the mask allows for altering the clothing style, such as tucking in clothes or rolling up sleeves.  <br>
+          </p>  
+          <div class="publication-img">
+              <img id="examples" src="static/images/examples/masking_samples.png"/>
+            </div>
+
+
+        </div>
+      </div>
+      <!--/ Cross domain. -->
+
+      <!-- New domain editing. -->
+    </div>
+    <!--/ New domain editing. -->
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <p>If you find our work useful, please cite our paper:</p>
+    <pre><code>@misc{under review,
+      doi = {placeholder},
+      url = {https://arxiv.org/placeholder},
+      author = {Anonymous},
+      title = {Diffuse to Choose: Enriching Image Conditioned Inpainting in Latent Diffusion Models for Virtual Try-All},
+      publisher = {will be submited to arXiv},
+      year = {2023},
+      primaryClass={cs.CV}
+}</code></pre>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/notyet">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="somegithublink" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website source code based on the <a href="https://nerfies.github.io/"> Nerfies</a> and <a href="https://textual-inversion.github.io/"> Textual Inversion</a>  project pages. If you want to reuse it, please credit them appropriately.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
