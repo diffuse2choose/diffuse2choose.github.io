@@ -208,3 +208,18 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+
+/* Base styles for the image */
+.carousel-content img {
+    width: 100%; /* Make the image take up the full container width */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 500px; /* Maximum height */
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .carousel-content img {
+        max-height: 200px; /* Smaller max height for mobile */
+    }
+}
+
