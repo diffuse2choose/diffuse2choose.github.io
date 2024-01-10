@@ -217,7 +217,7 @@ body {
 }
 
 /* Mobile styles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 200px) {
     .carousel-content img {
         max-height: 200px; /* Smaller max height for mobile */
     }
