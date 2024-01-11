@@ -216,10 +216,12 @@ body {
     max-height: 500px; /* Maximum height */
 }
 
-/* Mobile styles */
-@media screen and (max-width: 200px) {
-    .carousel-content img {
-        max-height: 200px; /* Smaller max height for mobile */
-    }
+@media screen and (max-width: 1023px) {
+
+  .results-carousel {
+    width: 50% !important;
+    margin: 0 auto;
+  }
+
 }
 
