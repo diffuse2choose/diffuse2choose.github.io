@@ -219,7 +219,7 @@ body {
 @media screen and (max-width: 1023px) {
 
   .results-carousel {
-    width: 50% !important;
+    max-width: 480px; 
     margin: 0 auto;
   }
 
